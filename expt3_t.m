@@ -1,0 +1,10 @@
+n = 7; % Codeword length
+k = 3; % Message length
+data = randi([0 1],k,1);
+pol = cyclpoly(n,k);
+parmat = cyclgen(n,pol);
+genmat = gen2par(parmat);
+encData = encode(data,n,k,'linear/binary',genmat);
+encData(3) = ~encData(3);
+decData = decode(encData,n,k,'linear/binary',genmat);
+numerr = biterr(data,decData)
